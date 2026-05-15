@@ -7,9 +7,12 @@ export interface ODataQueryOptions {
   select?: string[]
 }
 
+const toODataValue = (value: string | number | boolean): string =>
+  typeof value === 'string' ? `'${value}'` : String(value)
+
 export const buildFilter = (filters: Record<string, string | number | boolean>): string =>
   Object.entries(filters)
-    .map(([key, value]) => `${key} eq '${value}'`)
+    .map(([key, value]) => `${key} eq ${toODataValue(value)}`)
     .join(' and ')
 
 export const buildODataQuery = (options: ODataQueryOptions): string => {

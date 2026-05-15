@@ -7,6 +7,7 @@ describe('odata query builder', () => {
     const query = buildODataQuery({ filter, top: 10, skip: 5, orderBy: 'createdAt desc' })
 
     expect(filter).toContain("status eq 'Open'")
+    expect(filter).toContain('priority eq 1')
     expect(query).toContain('$top=10')
     expect(query).toContain('$skip=5')
     expect(query).toContain('$orderby=createdAt+desc')
