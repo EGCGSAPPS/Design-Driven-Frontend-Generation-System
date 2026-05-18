@@ -69,10 +69,7 @@ function IssueTable({ issues }: { issues: Issue[] }) {
     return <EmptyState title="No issues found" description="There are no issues matching the current view." />
   }
 
-  const rows: TableRow[] = issues.map((issue) => ({
-    ...issue,
-    status: issue.status,
-  }))
+  const rows: TableRow[] = issues.map((issue) => ({ ...issue }))
 
   const columns = TABLE_COLUMNS.map((col) =>
     col.key === 'status'
@@ -97,6 +94,7 @@ export const HomePage = () => {
       issue.supplier.toLowerCase().includes(search.toLowerCase()) ||
       issue.assignedTo.toLowerCase().includes(search.toLowerCase())
 
+    // TODO: replace 'John Doe' with the authenticated user's name once API integration is complete
     if (activeTab === 'assigned') return matchesSearch && issue.assignedTo === 'John Doe'
     if (activeTab === 'closed') return matchesSearch && issue.status === 'Completed'
     return matchesSearch
