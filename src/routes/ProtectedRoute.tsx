@@ -1,6 +1,3 @@
-import { Navigate, Outlet } from 'react-router-dom'
-import { ROUTES } from '../constants/routes'
-import { authService } from '../services/auth/authService'
+import { Outlet } from "react-router-dom";
 
-export const ProtectedRoute = () =>
-  authService.isAuthenticated() ? <Outlet /> : <Navigate to={ROUTES.LOGIN} replace />
+export const ProtectedRoute = () => <Outlet />;
