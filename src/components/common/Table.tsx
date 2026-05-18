@@ -1,6 +1,9 @@
+import { type ReactNode } from 'react'
+
 export interface TableColumn<T> {
   key: keyof T
   header: string
+  renderCell?: (row: T) => ReactNode
 }
 
 export interface TableProps<T extends Record<string, unknown>> {
@@ -25,7 +28,7 @@ export const Table = <T extends Record<string, unknown>>({ columns, rows }: Tabl
           <tr key={index} className="border-t border-border">
             {columns.map((column) => (
               <td key={String(column.key)} className="px-4 py-3 text-text-primary">
-                {String(row[column.key])}
+                {column.renderCell ? column.renderCell(row) : String(row[column.key])}
               </td>
             ))}
           </tr>
